@@ -24,12 +24,14 @@ import { useEffect } from "react";
 export default function Video(props) {
     const {video, loading} = props
 
+    const defaultAvatar = "http://agritech.altek.vn/sites/default/files/default_images/24-248253_user-profile-default-image-png-clipart-png-download.png";
+
     return (
         <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
             <div className="flex p-3">
-                <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" className="w-12 h-12 rounded-full mr-3"/>
+                <img src={video.createdBy.imageUrl || defaultAvatar} className="w-12 h-12 rounded-full mr-3"/>
                 <div>
-                    <div className="text-black">Nguyen Duc Duy</div>
+                    <div className="text-black">{video.createdBy.username}</div>
                     <div className="text-gray-500">August 16th, 2022</div>
                 </div>                
             </div>
@@ -37,8 +39,16 @@ export default function Video(props) {
                 <YoutubeFrame video={video}/>
             </div>
             <div>
-                <div className="p-3 font-semibold">{video.snippet.title}</div>
-                <div className="p-3 pt-0">{video.snippet.channelTitle}</div>
+                <div className="p-3 font-semibold">{sliceText(video.snippet.title)}</div>
+                <div className="p-1 pl-3 pt-0">{video.snippet.channelTitle}</div>
+            </div>
+            <div className="p-3 pt-0">
+                <div>
+                    <span>{convertToInternationalCurrencySystem(video.statistics.viewCount)} views</span> • <span>{moment(video.snippet.publishedAt).fromNow()}</span>
+                </div>
+                <div>
+                    {convertToInternationalCurrencySystem(video.statistics.likeCount)} likes 👍
+                </div>
             </div>
         </div>
     );
