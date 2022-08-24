@@ -26,28 +26,22 @@ function Content(props) {
         }
         else{
             return (
-                <Box sx={{ flexGrow: 1, my: 2}}>
+                <div>
                     {appContext.modeSearching && !appContext.loading && <Box sx={{fontWeight: "bold"}}>Display {videos.length} of {appContext.countSearchResult} {appContext.countSearchResult > 1 ? "results" : "result"}</Box>}
                     {appContext.modeFilterCategory && !appContext.loading && <Box sx={{fontWeight: "bold"}}>Display {videos.length} of {appContext.countVideoByCategory} {appContext.countVideoByCategory > 1 ? "results" : "result"}</Box>}
                     <InfiniteScroll
                         dataLength={videos.length}
                         next={handleFetchMoreData}
                         hasMore={appContext.hasMoreVideo}
-                        loader={<h3 className="font-bold text-center text-lg">Loading ...</h3>}
+                        loader={<h3 className="font-bold text-center text-xl">Loading ...</h3>}
                     >
-                        <Grid
-                            container
-                            spacing={{ xs: 2, md: 2 }}
-                            columns={{ xs: 1, sm: 8, md: 12 }}
-                        >
+                        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                             {videos.map((item, index) => (
-                                <Grid item xs={1} sm={4} md={3} key={index}>
-                                    <Video video={item} loading={appContext.loading}/>
-                                </Grid>
+                                <Video video={item} key={index} loading={appContext.loading}/>
                             ))}
-                        </Grid>
+                        </div>
                     </InfiniteScroll>
-                </Box>
+                </div>
             );
         }
     }

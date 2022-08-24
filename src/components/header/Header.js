@@ -54,9 +54,9 @@ export default function BackToTop(props) {
         <React.Fragment>
             <CssBaseline />
             <AppBar style={{backgroundColor: "#fff"}} elevation={1}>
-                <Container>
+                <div className="container mx-auto">
                     <HeaderContent />
-                </Container>
+                </div>
             </AppBar>
             <Toolbar id="back-to-top-anchor" />
             <ScrollTop {...props}>

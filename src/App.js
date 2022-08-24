@@ -13,6 +13,7 @@ import useLoginModal from "./hooks/useLoginModal";
 import useShareModal from "./hooks/useShareModal";
 import { loginUser } from "./services/userService";
 import { gapi } from "gapi-script";
+import Divider from "./components/common/Divider";
 function App() {
     const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("currentUser")));
     const {showLoginModal, showLogin, hideLogin} = useLoginModal()
@@ -51,13 +52,13 @@ function App() {
                 },
             }}
         >
-            <Box sx={{ backgroundColor: "#f8f8f8", minHeight: "100vh"}}>
-                <Container maxWidth="lg">
+            <div className="bg-grayBackground h-screen">
+                <div className="container mx-auto">
                     <Header />
                     <CategoryList categories={categories}/>
                     <Content videos={videos} />
-                </Container>
-            </Box>
+                </div>
+            </div>
             {showLoginModal && <LoginModal />}
             {showShareModal && <ShareModal/> }
         </AppContext.Provider>

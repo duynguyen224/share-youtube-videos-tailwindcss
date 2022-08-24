@@ -45,56 +45,35 @@ export default function ShareModal() {
     return (
         <div>
             <Dialog open={true} onClose={handleClose} fullWidth>
-                <Box sx={dialogTitleStyles}>
-                    <DialogTitle sx={{ fontWeight: "bold" }}>
-                        Share video to the world !
-                    </DialogTitle>
-                    <CloseIcon
-                        sx={{ marginRight: 2, cursor: "pointer" }}
+                <div className="flex items-center justify-between">
+                    <div className="font-bold text-2xl my-3 ml-6">
+                        Share your favorite video !
+                    </div>
+                    <div 
+                        className="mr-5 hover:cursor-pointer hover:bg-red-400 hover:text-white"
                         onClick={handleClose}
-                    />
-                </Box>
+                    >
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </div>
+                </div>
                 <Divider />
                 <DialogContent>
-                    <Box
-                        sx={{
-                            position: "relative",
-                            display: "flex",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                        }}
-                    >
-                        <TextField
-                            id="outlined-test"
-                            label="Enter video link"
-                            sx={{ width: "100%" }}
-                            placeholder="Example: https://www.youtube.com/watch?v=wsklajasf"
+                    <div className="flex items-center ">
+                        <input type="email" 
+                            placeholder="Example: https://www.youtube.com/watch?v=4sosXZsdy-s"
+                            className="h-12 w-full px-3 border border-rose-100 rounded-md my-3 hover:border-rose-300 focus:outline-none focus:border-rose-300 focus:text-lg"
                             onChange={(e) => handleSetSearchUrl(e)}
                         />
-                        <Box sx={{ display: error ? "none" : "block" }}>
-                            <Button
-                                variant="contained"
-                                size="small"
-                                disableElevation
-                                sx={{ height: "40px" }}
-                                style={{
-                                    borderRadius: 20,
-                                    backgroundColor: "rgb(255 82 82)",
-                                    padding: "6px 12px",
-                                    marginLeft: "5px",
-                                    fontSize: "15px",
-                                    color: "#fff",
-                                }}
-                                onClick={async () => {
-                                    await handleShareVideo(video);
-                                    appCallback.hideShare();
-                                    appCallback.reloadData();
-                                }}
-                            >
-                                Share
-                            </Button>
-                        </Box>
-                    </Box>
+                        <button className="h-11 ml-2 px-2 rounded-md text-white uppercase text-lg bg-gradient-to-r from-rose-400 to-red-600 hover:shadow-md focus:outline-red-500"
+                            onClick={async () => {
+                                await handleShareVideo(video);
+                                appCallback.hideShare();
+                                appCallback.reloadData();
+                            }}
+                        >
+                            Share
+                        </button>
+                    </div>
                     {renderSearchResult()}
                 </DialogContent>
             </Dialog>

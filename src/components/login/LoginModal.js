@@ -25,6 +25,10 @@ export default function LoginModal() {
             email: email,
             password: password,
         };
+        if(email === "" || password === ""){
+            alert("Please enter both your email and password");
+            return;
+        }
         appCallback.handleLogin(loginInfo);
     };
 
@@ -41,67 +45,52 @@ export default function LoginModal() {
     return (
         <div>
             <Dialog open={true} onClose={handleClose} fullWidth>
-                <Box sx={dialogTitleStyles}>
-                    <DialogTitle sx={{ fontWeight: "bold" }}>
-                        Log in or sign up
-                    </DialogTitle>
-                    <CloseIcon
-                        sx={{ marginRight: 2, cursor: "pointer" }}
-                        onClick={handleClose}
-                    />
-                </Box>
-                <Divider />
-                <DialogContent>
-                    <Box sx={{ "& .MuiTextField-root": { mb: 2 } }}>
-                        <Typography variant="h6" gutterBottom component="div">
-                            <Box sx={{ fontWeight: "500" }}>
-                                Welcome to Youtube Sharing
-                            </Box>
-                        </Typography>
-                        <TextField
-                            id="outlined-email"
-                            type="email"
-                            label="Email"
-                            fullWidth
-                            value={email}
-                            onChange={(e) => {
-                                setEmail(e.target.value);
-                            }}
-                        />
-                        <TextField
-                            id="outlined-password"
-                            label="Password"
-                            type="password"
-                            fullWidth
-                            value={password}
-                            onChange={(e) => {
-                                setPassword(e.target.value);
-                            }}
-                        />
-                        <Button
-                            variant="contained"
-                            fullWidth
-                            sx={{ mb: 2 }}
-                            style={{
-                                borderRadius: 25,
-                                backgroundColor: "rgb(255 82 82)",
-                                padding: "10px 20px",
-                                fontSize: "15px",
-                                color: "#fff",
-                            }}
-                            onClick={handleClickLogin}
+                <div className="bg-gradient-to-r from-rose-50 to-red-100 ">
+                    <div className="flex items-center justify-between">
+                        <div className="font-bold text-2xl my-3 ml-6">
+                            Log in or sign up
+                        </div>
+                        <div 
+                            className="mr-5 hover:cursor-pointer hover:bg-red-400 hover:text-white"
+                            onClick={handleClose}
                         >
-                            Login
-                        </Button>
-                    </Box>
-                    <Divider>
-                        <Chip label="OR" />
-                    </Divider>
-                    <Box sx={{ display: "flex", justifyContent: "center" }}>
-                        <LoginButton />
-                        {/* <LogoutButton/> */}
-                    </Box>
-                </DialogContent>
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </div>
+                    </div>
+                    <Divider />
+                    <DialogContent>
+                        <div>
+                            <div className="text-black text-xl">
+                                Welcome to Youtube Sharing
+                            </div>
+                            <input type="email" placeholder="Enter your email"
+                                className="h-12 w-full px-3 border border-rose-100 rounded-md my-3 hover:border-rose-300 focus:outline-none focus:border-rose-300 focus:text-lg"
+                                value={email}
+                                onChange={(e) => {
+                                    setEmail(e.target.value);
+                                }}
+                            />
+                            <input type="password" placeholder="Enter your password"
+                                className="h-12 w-full px-3 border border-rose-100 rounded-md my-3 hover:border-rose-300 focus:outline-none focus:border-rose-300  focus:text-lg"
+                                value={password}
+                                onChange={(e) => {
+                                    setPassword(e.target.value);
+                                }}
+                            />
+                            <button className="h-12 w-full rounded-md text-white uppercase text-lg my-6 mt-3 bg-gradient-to-r from-rose-400 to-red-600 hover:shadow-md focus:outline-red-500"
+                                onClick={handleClickLogin}
+                            >
+                                Login
+                            </button>
+                        </div>
+                        <Divider sx={{marginBottom: 2}}>
+                            <Chip label="OR" />
+                        </Divider>
+                        <div className="flex justify-center">
+                            <LoginButton />
+                        </div>
+                    </DialogContent>
+                </div>
             </Dialog>
         </div>
     );

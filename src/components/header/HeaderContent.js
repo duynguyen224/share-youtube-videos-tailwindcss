@@ -7,58 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../constants/AppContext";
 import AccountMenu from "./AccountMenu";
 
-const headerStyles = {
-    height: "56px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-};
-
-const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.black, 0.04),
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.common.black, 0.07),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
-      width: 'auto',
-    },
-    color: "#000",
-}));
-  
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}));
-  
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create('width'),
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        width: '20ch',
-      },
-      [theme.breakpoints.up('md')]: {
-        width: '40ch',
-      },
-      
-    },
-}));
-
 function HeaderContent() {
     let navigate = useNavigate();
  
@@ -75,45 +23,37 @@ function HeaderContent() {
 
     return (
         <React.Fragment>
-            <Box sx={headerStyles}>
+            <div className='flex justify-between items-center'>
                 <a href="/">
                     <img
                         src="YouTube_Logo_2017.svg"
                         style={{ height: "30px" }}
                     />
                 </a>
-                <Search>
-                    <SearchIconWrapper>
-                    <SearchIcon />
-                    </SearchIconWrapper>
-                    <StyledInputBase
-                        placeholder="Search…"
-                        inputProps={{ 'aria-label': 'search' }}
+                <div className="hidden relative w-80 text-black hover:cursor-pointer md:block">
+                    <div className="absolute top-1/2 left-1 transform -translate-y-1/2">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <input className="bg-stone-100 p-2 px-6 pl-10 w-full focus:outline-none"
+                        placeholder='Type here to search'
                         onChange={handleSearch}
                         value={appContext.searchQuery}
                     />
-                </Search>
-                <Box sx={{ display: "flex", alignItems: "center" }}>
+                </div>
+                <div className="block md:hidden text-black">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+                <div className='flex justify-center'>
                     {appContext.currentUser && (
-                        <Button
-                            variant="contained"
-                            size="small"
-                            sx={{ height: "40px" }}
-                            style={{
-                                borderRadius: 25,
-                                backgroundColor: "rgb(255 82 82)",
-                                padding: "10px 20px",
-                                fontSize: "15px",
-                                color: "#fff"
-                            }}
-                            onClick={showShareModal}
+                        <button className="h-10 w-full rounded-md text-white uppercase text-md my-2 px-2 bg-gradient-to-r from-red-400 to-red-600 hover:shadow-md focus:outline-red-500"
+                        onClick={showShareModal}
                         >
                             Share video
-                        </Button>
+                        </button>
                     )}
                     <AccountMenu />
-                </Box>
-            </Box>
+                </div>
+            </div>
         </React.Fragment>
     );
 }

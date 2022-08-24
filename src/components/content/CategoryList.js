@@ -22,27 +22,16 @@ function CategoryList(props) {
     return (
         <React.Fragment>
             <ScrollMenu LeftArrow={"<"} RightArrow={">"}>
-                <Box sx={{ height: 70, display: "flex", alignItems: "center"}}>
-                    <Stack direction="row" spacing={1}>
-                        {categories.map((item) => (
-                            <Chip
-                                label={item.name}
-                                key={item.id}
-                                variant={ active.id === item.id ? "contained" : "outlined" }
-                                onClick={() => {handleClickChip(item)}}
-                                sx={{ 
-                                    borderRadius: 20,
-                                    padding: "5px 5px",
-                                    fontSize: "15px",
-                                }}
-                                style={{
-                                    backgroundColor: active.id === item.id ? "rgb(255 82 82)" : "",
-                                    color: active.id === item.id ? "#fff" : "#000"
-                                }}
-                            />
-                        ))}
-                    </Stack>
-                </Box>
+                <div className="flex my-6 space-x-2">
+                    {categories.map((item, index) => (
+                        <div key={index}
+                            className={`border border-gray-400 rounded-full p-1 px-2 hover:cursor-pointer ${active.id === item.id ? 'bg-red-500 text-white outline-none' : ''}`}
+                            onClick={() => {handleClickChip(item)}}
+                        >
+                            {item.name}
+                        </div>
+                    ))}
+                </div>
                 <Divider sx={{ paddingTop: 1 }} />
             </ScrollMenu>
         </React.Fragment>
