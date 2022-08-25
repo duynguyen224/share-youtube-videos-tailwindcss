@@ -1,4 +1,3 @@
-import { rootShouldForwardProp } from '@mui/material/styles/styled';
 import { useEffect, useState } from 'react';
 import { getAllCategories } from '../services/categoryService';
 import { countVideoByCategoryFilter, countVideoWithoutSearch, countVideoWithSearch, fetchMoreVideoByName, filterVideoByCategory, loadMoreVideoWithoutSearch } from '../services/videoService';

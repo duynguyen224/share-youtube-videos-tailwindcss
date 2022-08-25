@@ -3,8 +3,8 @@ import { ALPHABET, YOUTUBE_PREFIX_URL } from "../constants";
 import dateFormat from "dateformat"
 
 export const sliceText = (input) => {
-    if (input.length > 40) {
-        return input.substring(0, 40) + "...";
+    if (input.length > 70) {
+        return input.substring(0, 70) + "...";
     }
     return input;
 };

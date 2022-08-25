@@ -1,18 +1,9 @@
-import * as React from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+import * as React from "react";
 import { AppContext } from "../../constants/AppContext";
-import { Box, Chip, Divider, Typography } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import Divider from "../common/Divider";
 import LoginButton from "./LoginButton";
-import LogoutButton from "./LogoutButton";
-import { useEffect } from "react";
-import { gapi } from "gapi-script";
 
 export default function LoginModal() {
     const { appCallback } = React.useContext(AppContext);
@@ -77,16 +68,14 @@ export default function LoginModal() {
                                     setPassword(e.target.value);
                                 }}
                             />
-                            <button className="h-12 w-full rounded-md text-white uppercase text-lg my-6 mt-3 bg-gradient-to-r from-rose-400 to-red-600 hover:shadow-md focus:outline-red-500"
+                            <button className="h-12 w-full rounded-md text-white uppercase text-lg my-6 mb-3 mt-3 bg-gradient-to-r from-rose-400 to-red-600 hover:shadow-md focus:outline-red-500"
                                 onClick={handleClickLogin}
                             >
                                 Login
                             </button>
                         </div>
-                        <Divider sx={{marginBottom: 2}}>
-                            <Chip label="OR" />
-                        </Divider>
-                        <div className="flex justify-center">
+                        <Divider text="OR" />
+                        <div className="flex justify-center mt-1">
                             <LoginButton />
                         </div>
                     </DialogContent>

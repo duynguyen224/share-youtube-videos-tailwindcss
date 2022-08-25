@@ -1,19 +1,27 @@
-import React from "react";
+import { useEffect, useRef, useState } from "react";
 
 function useAccountMenu() {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const ref = useRef(null);
+    const [openMenu, setOpenMenu] = useState(false);
 
-    const open = Boolean(anchorEl);
+    useEffect(() => {
+        /**
+         * Alert if clicked on outside of element
+         */
+        function handleClickOutside(event) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                setOpenMenu(false);
+            }
+        }
+        // Bind the event listener
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            // Unbind the event listener on clean up
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [ref]);
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    return { anchorEl, open, handleClick, handleClose };
+    return { ref, openMenu, setOpenMenu };
 }
 
 export default useAccountMenu;

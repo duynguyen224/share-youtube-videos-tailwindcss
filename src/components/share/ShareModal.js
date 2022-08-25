@@ -1,14 +1,11 @@
-import CloseIcon from "@mui/icons-material/Close";
-import { Alert, Box, Chip, Divider, Skeleton } from "@mui/material";
-import Button from "@mui/material/Button";
+import { Alert, Skeleton } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import TextField from "@mui/material/TextField";
 import * as React from "react";
 import { AppContext } from "../../constants/AppContext";
 import useShareVideo from "../../hooks/useShareVideo";
 import { isEmptyObject } from "../../utils";
+import Divider from "../common/Divider";
 import YoutubeFrame from "../youtubeFrame/YoutubeFrame";
 
 export default function ShareModal() {
@@ -22,9 +19,7 @@ export default function ShareModal() {
     const renderSearchResult = () => {
         return (
             <React.Fragment>
-                <Divider sx={{ mt: 2, mb: 2 }}>
-                    <Chip label="RESULT" />
-                </Divider>
+                <Divider text="RESULT"/>
                 {!isEmptyObject(video) && !error && !frameLoading && <YoutubeFrame video={video} height={"400px"}/>}
                 {error && (
                     <Alert severity="error">
@@ -46,7 +41,7 @@ export default function ShareModal() {
         <div>
             <Dialog open={true} onClose={handleClose} fullWidth>
                 <div className="flex items-center justify-between">
-                    <div className="font-bold text-2xl my-3 ml-6">
+                    <div className="font-semibold text-xl my-3 ml-6">
                         Share your favorite video !
                     </div>
                     <div 
@@ -61,10 +56,10 @@ export default function ShareModal() {
                     <div className="flex items-center ">
                         <input type="email" 
                             placeholder="Example: https://www.youtube.com/watch?v=4sosXZsdy-s"
-                            className="h-12 w-full px-3 border border-rose-100 rounded-md my-3 hover:border-rose-300 focus:outline-none focus:border-rose-300 focus:text-lg"
+                            className="h-11 w-full px-3 border-2 border-gray-200 rounded-md my-3 hover:border-blue-300 hover:border-2 focus:border-2 focus:outline-none focus:border-blue-300 focus:text-lg placeholder:italic"
                             onChange={(e) => handleSetSearchUrl(e)}
                         />
-                        <button className="h-11 ml-2 px-2 rounded-md text-white uppercase text-lg bg-gradient-to-r from-rose-400 to-red-600 hover:shadow-md focus:outline-red-500"
+                        <button className="h-10 ml-2 px-3 rounded-md text-white text-lg bg-gradient-to-r bg-blue-500"
                             onClick={async () => {
                                 await handleShareVideo(video);
                                 appCallback.hideShare();

@@ -1,9 +1,5 @@
-import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
-import React, { useContext, useEffect, useState } from "react";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
+import React, { useContext, useState } from "react";
+import { ScrollMenu } from 'react-horizontal-scrolling-menu';
 import { AppContext } from "../../constants/AppContext";
 
 function CategoryList(props) {
@@ -32,7 +28,6 @@ function CategoryList(props) {
                         </div>
                     ))}
                 </div>
-                <Divider sx={{ paddingTop: 1 }} />
             </ScrollMenu>
         </React.Fragment>
     );

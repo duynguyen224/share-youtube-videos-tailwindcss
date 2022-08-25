@@ -14,6 +14,8 @@ import useShareModal from "./hooks/useShareModal";
 import { loginUser } from "./services/userService";
 import { gapi } from "gapi-script";
 import Divider from "./components/common/Divider";
+import Skeleton from "./components/common/Skeleton";
+
 function App() {
     const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("currentUser")));
     const {showLoginModal, showLogin, hideLogin} = useLoginModal()

@@ -1,8 +1,4 @@
-import SearchIcon from '@mui/icons-material/Search';
-import { Box, Button, Link } from "@mui/material";
-import InputBase from '@mui/material/InputBase';
-import { alpha, styled } from '@mui/material/styles';
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../constants/AppContext";
 import AccountMenu from "./AccountMenu";
@@ -18,7 +14,6 @@ function HeaderContent() {
 
     const handleSearch = (e) => { 
         appCallback.handleSearchChange(e.target.value);
-        
     }
 
     return (
@@ -31,8 +26,8 @@ function HeaderContent() {
                     />
                 </a>
                 <div className="hidden relative w-80 text-black hover:cursor-pointer md:block">
-                    <div className="absolute top-1/2 left-1 transform -translate-y-1/2">
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <div className="absolute text-gray-400 top-1/2 left-1 transform -translate-y-1/2">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </div>
                     <input className="bg-stone-100 p-2 px-6 pl-10 w-full focus:outline-none"
                         placeholder='Type here to search'
@@ -45,7 +40,7 @@ function HeaderContent() {
                 </div>
                 <div className='flex justify-center'>
                     {appContext.currentUser && (
-                        <button className="h-10 w-full rounded-md text-white uppercase text-md my-2 px-2 bg-gradient-to-r from-red-400 to-red-600 hover:shadow-md focus:outline-red-500"
+                        <button className="h-11 w-full rounded-md text-white uppercase text-md my-2 px-2 bg-gradient-to-r from-red-400 to-red-600 hover:shadow-md focus:outline-red-500"
                         onClick={showShareModal}
                         >
                             Share video

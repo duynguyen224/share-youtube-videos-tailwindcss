@@ -1,21 +1,11 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Tooltip from "@mui/material/Tooltip";
-import PersonAdd from "@mui/icons-material/PersonAdd";
-import Settings from "@mui/icons-material/Settings";
-import Logout from "@mui/icons-material/Logout";
-import useAccountMenu from "../../hooks/useAccountMenu";
+import * as React from "react";
+import { defaultAvatar } from "../../constants";
 import { AppContext } from "../../constants/AppContext";
+import useAccountMenu from "../../hooks/useAccountMenu";
 
 export default function AccountMenu() {
-    const {anchorEl , open, handleClick, handleClose} = useAccountMenu();
+    const {ref, openMenu, setOpenMenu} = useAccountMenu();
     const {appContext, appCallback} = React.useContext(AppContext)
 
     const renderAvatar = () => {
@@ -33,91 +23,55 @@ export default function AccountMenu() {
         window.location.reload();
     };
 
-    const renderGuestMenuItems = () => {
-        return (
-            <MenuItem onClick={handleOpenLoginModal}>
-                <Avatar />
-                Login
-            </MenuItem>
-        );
-    };
+    const handleOpenMenu = () => {
+        setOpenMenu(!openMenu);
+    }
 
-    const renderUserMenuItems = () => {
-        return [
-            <MenuItem key={1}>
-                <Avatar/> My account
-            </MenuItem>,
-            <Divider key={2} />,
-            <MenuItem onClick={handleLogout} key={3}>
-                <ListItemIcon>
-                    <Logout fontSize="small" />
-                </ListItemIcon>
-                Logout
-            </MenuItem>,
-        ];
-    };
+    const renderUserMenu = () => {
+        return (
+            <>
+                <div className="flex items-center p-3 border-b-2 hover:bg-gray-200">
+                    <span className="mr-2">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </span>
+                        My account
+                </div>
+                <div className="flex items-center p-3 border-b-2 hover:bg-gray-200" 
+                    onClick={handleLogout}
+                >
+                    <span className="mr-2">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                    </span>
+                    Log out
+                </div>
+            </>)
+    }
+
+    const renderGuestMenu = () => {
+        return (
+            <div className="flex items-center p-3 hover:bg-gray-200" 
+                onClick={handleOpenLoginModal}
+            >
+                <span className="mr-2">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+                </span>
+                Log in
+            </div>
+        )
+    }
 
     return (
-        <React.Fragment>
-            <Box
-                sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    textAlign: "center",
-                }}
-            >
-                <Tooltip title="Account settings">
-                    <IconButton
-                        onClick={handleClick}
-                        size="small"
-                        sx={{ ml: 2 }}
-                        aria-controls={open ? "account-menu" : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? "true" : undefined}
-                    >
-                        {renderAvatar()}
-                    </IconButton>
-                </Tooltip>
-                <Menu
-                    anchorEl={anchorEl}
-                    id="account-menu"
-                    open={open}
-                    onClose={handleClose}
-                    onClick={handleClose}
-                    PaperProps={{
-                        elevation: 0,
-                        sx: {
-                            overflow: "visible",
-                            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                            mt: 1.5,
-                            "& .MuiAvatar-root": {
-                                width: 32,
-                                height: 32,
-                                ml: -0.5,
-                                mr: 1,
-                            },
-                            "&:before": {
-                                content: '""',
-                                display: "block",
-                                position: "absolute",
-                                top: 0,
-                                right: 14,
-                                width: 10,
-                                height: 10,
-                                bgcolor: "background.paper",
-                                transform: "translateY(-50%) rotate(45deg)",
-                                zIndex: 0,
-                            },
-                        },
-                    }}
-                    transformOrigin={{ horizontal: "right", vertical: "top" }}
-                    anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-                >
-                    {localStorage.getItem("currentUser")
-                        ? renderUserMenuItems()
-                        : renderGuestMenuItems()}
-                </Menu>
-            </Box>
-        </React.Fragment>
+        <div className="flex relative items-center text-black hover:cursor-pointer" 
+            onClick={handleOpenMenu}
+        >
+            <div className="py-2">
+                <img className="w-14 ml-2 rounded-full" src={localStorage.getItem("currentUser") ? appContext.currentUser.imageUrl : defaultAvatar}/>
+            </div>
+            {openMenu && 
+                <div className="absolute top-16 -left-4 w-36 mt-1 bg-white shadow-lg" ref={ref}>
+                    {localStorage.getItem("currentUser") ? renderUserMenu() : renderGuestMenu()}
+                </div>
+            }
+        </div>
     );
 }

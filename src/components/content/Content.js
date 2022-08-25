@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import React, { useContext } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { AppContext } from "../../constants/AppContext";
@@ -33,7 +33,7 @@ function Content(props) {
                         dataLength={videos.length}
                         next={handleFetchMoreData}
                         hasMore={appContext.hasMoreVideo}
-                        loader={<h3 className="font-bold text-center text-xl">Loading ...</h3>}
+                        loader={<h3 className="font-bold text-center text-xl my-4">Loading ...</h3>}
                     >
                         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                             {videos.map((item, index) => (
