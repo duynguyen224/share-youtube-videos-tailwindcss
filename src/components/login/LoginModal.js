@@ -53,16 +53,18 @@ export default function LoginModal() {
                         <div>
                             <div className="text-black text-xl">
                                 Welcome to Youtube Sharing
+                                <br/>
+                                Account: test@gmail.com - 123456
                             </div>
                             <input type="email" placeholder="Enter your email"
-                                className="h-12 w-full px-3 border border-rose-100 rounded-md my-3 hover:border-rose-300 focus:outline-none focus:border-rose-300 focus:text-lg"
+                                className="h-12 w-full px-3 border border-rose-100 rounded-md my-3 hover:border-blue-300 focus:outline-none focus:border-blue-300 focus:text-lg"
                                 value={email}
                                 onChange={(e) => {
                                     setEmail(e.target.value);
                                 }}
                             />
                             <input type="password" placeholder="Enter your password"
-                                className="h-12 w-full px-3 border border-rose-100 rounded-md my-3 hover:border-rose-300 focus:outline-none focus:border-rose-300  focus:text-lg"
+                                className="h-12 w-full px-3 border border-rose-100 rounded-md my-3 hover:border-blue-300 focus:outline-none focus:border-blue-300  focus:text-lg"
                                 value={password}
                                 onChange={(e) => {
                                     setPassword(e.target.value);
