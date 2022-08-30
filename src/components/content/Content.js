@@ -22,7 +22,7 @@ function Content(props) {
 
     const renderContent = () => {
         if(videos.length === 0){
-            return <h3>No data to display</h3>;
+            return <h3 className="text-lg font-bold">No data to display</h3>;
         }
         else{
             return (

@@ -1,6 +1,6 @@
-import { Box, Container } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
+import Modal from "./components/common/Modal";
 import CategoryList from "./components/content/CategoryList";
 import Content from "./components/content/Content";
 import Header from "./components/header/Header";
@@ -11,10 +11,7 @@ import useFetchAndSearchVideo from "./hooks/useFetchAndSearchVideo";
 import useLoginAction from "./hooks/useLoginAction";
 import useLoginModal from "./hooks/useLoginModal";
 import useShareModal from "./hooks/useShareModal";
-import { loginUser } from "./services/userService";
-import { gapi } from "gapi-script";
-import Divider from "./components/common/Divider";
-import Skeleton from "./components/common/Skeleton";
+import useVisible from "./hooks/useVisible";
 
 function App() {
     const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("currentUser")));
@@ -36,7 +33,7 @@ function App() {
                     hasMoreVideo: hasMoreVideo,
                     loading: loading, 
                     modeFilterCategory: modeFilterCategory,
-                    countVideoByCategory, countVideoByCategory,
+                    countVideoByCategory: countVideoByCategory,
                 },
                 appCallback: {
                     handleLogin: handleLogin,
@@ -50,7 +47,7 @@ function App() {
                     reloadData: reloadData,
                     handleSearchChange: setSearchQuery,
                     handleFilterByCategory: handleFilterByCategory,
-                    fetchMoreVideoByCategory: fetchMoreVideoByCategory
+                    fetchMoreVideoByCategory: fetchMoreVideoByCategory,
                 },
             }}
         >
@@ -62,7 +59,7 @@ function App() {
                 </div>
             </div>
             {showLoginModal && <LoginModal />}
-            {showShareModal && <ShareModal/> }
+            {showShareModal && <ShareModal />}
         </AppContext.Provider>
     );
 }

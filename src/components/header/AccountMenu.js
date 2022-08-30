@@ -2,12 +2,12 @@ import Avatar from "@mui/material/Avatar";
 import * as React from "react";
 import { defaultAvatar } from "../../constants";
 import { AppContext } from "../../constants/AppContext";
-import useAccountMenu from "../../hooks/useAccountMenu";
+import useVisible from "../../hooks/useVisible";
 
 export default function AccountMenu() {
-    const {ref, openMenu, setOpenMenu} = useAccountMenu();
+    const {ref, open, setOpen} = useVisible();
     const {appContext, appCallback} = React.useContext(AppContext)
-
+  
     const renderAvatar = () => {
         return localStorage.getItem("currentUser") ? <Avatar src={appContext.currentUser.imageUrl}></Avatar> : <Avatar/>
     }
@@ -24,7 +24,7 @@ export default function AccountMenu() {
     };
 
     const handleOpenMenu = () => {
-        setOpenMenu(!openMenu);
+        setOpen(!open);
     }
 
     const renderUserMenu = () => {
@@ -67,7 +67,7 @@ export default function AccountMenu() {
             <div className="py-2">
                 <img className="w-14 ml-2 rounded-full" src={localStorage.getItem("currentUser") ? appContext.currentUser.imageUrl : defaultAvatar}/>
             </div>
-            {openMenu && 
+            {open && 
                 <div className="absolute top-16 -left-4 w-36 mt-1 bg-white shadow-lg" ref={ref}>
                     {localStorage.getItem("currentUser") ? renderUserMenu() : renderGuestMenu()}
                 </div>

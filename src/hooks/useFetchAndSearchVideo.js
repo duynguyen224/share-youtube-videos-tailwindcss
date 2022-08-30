@@ -109,7 +109,6 @@ function useFetchAndSearchVideo() {
 
     const fetchMoreVideoWithSearch = async () => {
         const result = await fetchMoreVideoByName(searchQuery, 8);
-        console.log(result);
         setTimeout(() => {
             setVideos(videos.concat([...result]));
         }, 1500);

@@ -10,6 +10,7 @@ function HeaderContent() {
    
     const showShareModal = () => {
         appCallback.showShare();
+        appCallback.setOpen(true);
     }
 
     const handleSearch = (e) => { 

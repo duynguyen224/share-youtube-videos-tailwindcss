@@ -1,8 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { AppContext } from "../constants/AppContext";
 
-function useAccountMenu() {
-    const ref = useRef(null);
-    const [openMenu, setOpenMenu] = useState(false);
+function useVisible() {
+    const ref = useRef();
+    const [open, setOpen] = useState(false);
+
+    const {appContext, appCallback} = useContext(AppContext);
 
     useEffect(() => {
         /**
@@ -10,7 +13,9 @@ function useAccountMenu() {
          */
         function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target)) {
-                setOpenMenu(false);
+                setOpen(false);
+                appCallback.hideShare();
+                appCallback.hideLogin();
             }
         }
         // Bind the event listener
@@ -21,7 +26,7 @@ function useAccountMenu() {
         };
     }, [ref]);
 
-    return { ref, openMenu, setOpenMenu };
+    return { ref, open, setOpen };
 }
 
-export default useAccountMenu;
+export default useVisible;

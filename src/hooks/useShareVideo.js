@@ -22,7 +22,7 @@ function useShareVideo() {
                 setFrameLoading(true);
                 setTimeout(() => {
                     searchVideo(videoId).then((res) => handleSearchVideo(res));
-                }, 2000);
+                }, 1500);
             }
         }
     }, [searchUrl]);
