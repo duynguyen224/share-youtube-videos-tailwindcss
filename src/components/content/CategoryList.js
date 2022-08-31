@@ -11,14 +11,13 @@ function CategoryList(props) {
 
     const handleClickChip = (item) => {
         setActive({ id: item.id });
-        // appCallback.getVideoByCategory(item);
         appCallback.handleFilterByCategory(item);
     }
 
     return (
         <React.Fragment>
             <ScrollMenu LeftArrow={"<"} RightArrow={">"}>
-                <div className="flex my-6 space-x-2">
+                <div className="flex my-6 space-x-2 mt-24">
                     {categories.map((item, index) => (
                         <div key={index}
                             className={`border border-gray-400 rounded-full p-1 px-2 hover:cursor-pointer ${active.id === item.id ? 'bg-red-500 text-white outline-none' : ''}`}

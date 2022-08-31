@@ -1,5 +1,5 @@
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import AppBar from "@mui/material/AppBar";
+// import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Fab from "@mui/material/Fab";
@@ -9,7 +9,7 @@ import useScrollTrigger from "@mui/material/useScrollTrigger";
 import PropTypes from "prop-types";
 import * as React from "react";
 import HeaderContent from "./HeaderContent";
-
+import AppBar from "../common/AppBar";
 function ScrollTop(props) {
     const { children, window } = props;
 
@@ -51,18 +51,31 @@ ScrollTop.propTypes = {
 export default function BackToTop(props) {
     return (
         <React.Fragment>
-            <CssBaseline />
-            <AppBar style={{backgroundColor: "#fff"}} elevation={1}>
-                <div className="container mx-auto">
+            <AppBar>
+                <div className="container mx-auto my">
                     <HeaderContent />
                 </div>
             </AppBar>
-            <Toolbar id="back-to-top-anchor" />
-            <ScrollTop {...props}>
-                <Fab size="small" aria-label="scroll back to top">
-                    <KeyboardArrowUpIcon />
-                </Fab>
-            </ScrollTop>
         </React.Fragment>
     );
 }
+
+
+// export default function BackToTop(props) {
+//     return (
+//         <React.Fragment>
+//             <CssBaseline />
+//             <AppBar style={{backgroundColor: "#fff"}} elevation={1}>
+//                 <div className="container mx-auto">
+//                     <HeaderContent />
+//                 </div>
+//             </AppBar>
+//             <Toolbar id="back-to-top-anchor" />
+//             <ScrollTop {...props}>
+//                 <Fab size="small" aria-label="scroll back to top">
+//                     <KeyboardArrowUpIcon />
+//                 </Fab>
+//             </ScrollTop>
+//         </React.Fragment>
+//     );
+// }

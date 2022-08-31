@@ -52,8 +52,8 @@ function App() {
             }}
         >
             <div className="bg-grayBackground h-screen">
+                <Header />
                 <div className="container mx-auto">
-                    <Header />
                     <CategoryList categories={categories}/>
                     <Content videos={videos} />
                 </div>
